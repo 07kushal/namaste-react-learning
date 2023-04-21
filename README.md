@@ -1,1 +1,1 @@
-# namaste-react-learning
+# Namaste React Learing 🚀
