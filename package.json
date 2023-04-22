@@ -1,0 +1,30 @@
+{
+  "name": "namaste-react-learning",
+  "version": "1.0.0",
+  "description": "this is project is based on namaste-react course.",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/07kushal/namaste-react-learning.git"
+  },
+  "author": "Kushal Saini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/07kushal/namaste-react-learning/issues"
+  },
+  "homepage": "https://github.com/07kushal/namaste-react-learning#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
