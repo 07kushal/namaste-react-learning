@@ -1,17 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { key: "1", id: "child" }, [
-    React.createElement("h1", { key: "2" }, "I'm an h1 tag"),
-    React.createElement("h2", { key: "3" }, "I'm an h2 tag"),
-  ]),
-  React.createElement("div", { key: "4", id: "child2" }, [
-    React.createElement("h1", { key: "5" }, "I'm an h1 tag"),
-    React.createElement("h2", { key: "6" }, "I'm an h2 tag"),
-  ]),
-]);
+// JSX (transpiled before it reaches the JS) - PARCEL - BABEL
+// JSX => BABEL transpiled it to React.createElement => React.createElement Object => HTMLElement(render)
+
+// Functional Component
+const Title = () => {
+  return <h1 className="title">Namaste React Functional Title Component 🚀</h1>;
+};
+
+const HeadingComponent = () => {
+  return (
+    <div className="container">
+      <Title />
+      <h1 className="heading">Namaste React Functional Heading Component 🚀</h1>
+    </div>
+  );
+};
+
+// React Component
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(parent);
+root.render(<HeadingComponent />);
