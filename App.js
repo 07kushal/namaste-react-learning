@@ -1,25 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Header from "./src/component/Header";
+import Body from "./src/component/body";
 
-// JSX (transpiled before it reaches the JS) - PARCEL - BABEL
-// JSX => BABEL transpiled it to React.createElement => React.createElement Object => HTMLElement(render)
+/**
+ * Header
+ *  - Logo
+ *  - Nav Items
+ * Body
+ *  - Search
+ *  - Restaurants Container
+ *    - Restaurants Cards
+ * Footer
+ *  - Copyrights
+ *  - Links
+ *  - Addresses
+ *  - Contact
+ */
 
-// Functional Component
-const Title = () => {
-  return <h1 className="title">Namaste React Functional Title Component 🚀</h1>;
-};
-
-const HeadingComponent = () => {
+const AppLayout = () => {
   return (
-    <div className="container">
-      <Title />
-      <h1 className="heading">Namaste React Functional Heading Component 🚀</h1>
+    <div className="app">
+      <Header />
+      <Body />
     </div>
   );
 };
 
 // React Component
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<HeadingComponent />);
+root.render(<AppLayout />);
