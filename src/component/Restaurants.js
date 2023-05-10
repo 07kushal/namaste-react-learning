@@ -1,16 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { restaurantsData } from "../Config/Data";
 import RestaurantCard from "./RestaurantCard";
 import Search from "./Search";
+import Shimmer from "./Shimmer";
 
 const Restaurants = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([...restaurantsData]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchListOfRestaurants();
+  }, []);
+
+  const fetchListOfRestaurants = async () => {
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.926495&lng=75.715856&page_type=DESKTOP_WEB_LISTING"
+      );
+      const data = await response.json();
+      const resCardData = data?.data?.cards?.[1]?.data?.data?.cards;
+      setListOfRestaurants(resCardData);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onClickFilter = () => {
-    const filterList = listOfRestaurants.filter((res) => res?.avgRating > 4);
+    const filterList =
+      listOfRestaurants?.filter?.((res) => {
+        return res?.data?.avgRating > 2;
+      }) || [];
     setListOfRestaurants([...filterList]);
   };
+
   const onClickAllRestaurants = () => {
-    setListOfRestaurants([...restaurantsData]);
+    setIsLoading(true);
+    fetchListOfRestaurants();
   };
 
   const searchRestaurants = async (searchValue) => {
@@ -21,6 +47,8 @@ const Restaurants = () => {
     });
     setListOfRestaurants([...filterList]);
   };
+
+  console.log("isLoading", isLoading);
   return (
     <>
       <Search searchRestaurants={searchRestaurants} />
@@ -34,12 +62,19 @@ const Restaurants = () => {
             Filter Top Restaurants
           </button>
         </>
-        <div className="restaurants-list-container">
-          {/* not using keys (not acceptable) << index as key <<<< unique key (best practices) */}
-          {listOfRestaurants.map((restaurant) => {
-            return <RestaurantCard key={restaurant.id} {...restaurant} />;
-          })}
-        </div>
+
+        {/* not using keys (not acceptable) << index as key <<<< unique key (best practices) */}
+        {isLoading ? (
+          <Shimmer />
+        ) : (
+          <div className="restaurants-list-container">
+            {listOfRestaurants?.map?.((restaurant) => {
+              console.log("restaurant", restaurant);
+              const restaurantProps = restaurant?.data || {};
+              return <RestaurantCard key={restaurantProps.id} {...restaurantProps} />;
+            })}
+          </div>
+        )}
       </div>
     </>
   );

@@ -186,3 +186,13 @@
   margin-top: 10px;
   padding: 10px;
 }
+
+.shimmer-effect {
+  background-color: #f6f7f8;
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  display: inline-block;
+  position: relative;
+  width: 348px;
+  height: 250px;
+}
